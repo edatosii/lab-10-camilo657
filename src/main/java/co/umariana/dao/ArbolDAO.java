@@ -263,4 +263,12 @@ public class ArbolDAO {
             return false;
         }
     }
+
+    public boolean probarConexion() {
+        try (Connection con = ConexionBD.conectar()) {
+            return con != null && !con.isClosed();
+        } catch (Exception e) {
+            return false;
+        }
+    }
 }

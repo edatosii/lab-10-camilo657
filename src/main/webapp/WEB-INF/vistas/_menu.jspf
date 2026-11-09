@@ -1,7 +1,20 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-<%-- Menú de la aplicación (lo incluyen todas las páginas). Ya está hecho: no es necesario modificarlo. --%>
+<%-- Menú de la aplicación (lo incluyen todas las páginas). --%>
+<%
+    co.umariana.dao.ArbolDAO daoMenu = new co.umariana.dao.ArbolDAO();
+    boolean dbOnline = daoMenu.probarConexion();
+%>
 <nav class="menu">
     <a class="marca" href="index.html">🌳 Árboles genealógicos</a>
     <a class="enlace <%= "construir".equals(request.getAttribute("seccion")) ? "activo" : "" %>" href="construir">Construir árbol genealógico</a>
     <a class="enlace <%= "arboles".equals(request.getAttribute("seccion")) ? "activo" : "" %>" href="arboles">Árboles guardados</a>
+
+    <!-- Indicador visual de la Base de Datos -->
+    <div style="margin-left: auto; display: flex; align-items: center;">
+        <% if (dbOnline) { %>
+            <span class="db-badge online">🟢 Base de datos: Conectada</span>
+        <% } else { %>
+            <span class="db-badge offline">🔴 Base de datos: Desconectada</span>
+        <% } %>
+    </div>
 </nav>
